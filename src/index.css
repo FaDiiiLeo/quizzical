@@ -1,13 +1,380 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+* {
+  margin: 0px;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+html,
+body {
+  height: auto;
+  width: auto;
+  min-height: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body {
+  background: #F5F7FB;
+}
+
+#root {
+  height: auto;
+  width: auto;
+  min-height: 100%;
+  min-height: 100vh;
+}
+
+.container {
+  height: auto;
+  width: auto;
+  min-height: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn {
+  background: #4D5B9E;
+  border-radius: 15px;
+  border: none;
+  color: #F5F7FB;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn:hover{
+  background: #2b3569;
+  box-shadow: 0px 5px 5px #caccd8;
+}
+
+.blue-blob_start-screen {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: -1;
+}
+
+.yellow-blob_start-screen {
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: -1;
+}
+
+.blue-blob_quiz-screen {
+  position: fixed;
+  left: -50px;
+  bottom: -50px;
+  z-index: -1;
+}
+
+.yellow-blob_quiz-screen {
+  position: fixed;
+  right: -25px;
+  top: -25px;
+  z-index: -1;
+}
+
+form{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 18px;
+  color: #293264;
+}
+
+form > div{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: right;
+  gap: 24px;
+}
+
+form label{
+  width: 220px;
+}
+
+form input, form select{
+  width: 200px;
+  padding: 6px 12px;
+  outline: none;
+}
+
+.start-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  padding: 0px 80px;
+}
+
+.start-screen--heading {
+  font-family: 'Karla';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 37px;
+  color: #293264;
+}
+
+.start-screen--desc {
+  font-size: 16px;
+  color: #293264;
+  text-align: center;
+}
+
+.start-screen--btn {
+  margin-top: 22px;
+  padding: 14px 48px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+}
+
+.loading {
+  width: 65px;
+  height: 65px;
+  background-color: grey;
+  gap: 8px;
+  position: relative;
+}
+
+.loading>div {
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  display: inline-block;
+  position: absolute;
+}
+
+.red {
+  background-color: red;
+}
+
+.yellow {
+  background-color: yellow;
+  bottom: 0;
+  left: 0;
+}
+
+.blue {
+  background-color: blue;
+  margin-left: 4px;
+  top: 0;
+  right: 0;
+  animation-name: blueBox;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+}
+
+.quiz-screen {
+  padding: 40px 75px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.question {
+  font-family: 'Karla';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+  color: #293264;
+}
+
+.all-choices {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin: 12px 0px;
+}
+
+.choice {
+  font-weight: 500;
+  font-size: 10.24px;
+  line-height: 12px;
+  text-align: center;
+  color: #293264;
+  border: 1px solid #293264;
+  border-radius: 8px;
+  padding: 3px 9px;
+  cursor: pointer;
+}
+
+
+.choice-selected {
+  font-weight: 500;
+  font-size: 10.24px;
+  line-height: 12px;
+  text-align: center;
+  background: #D6DBF5;
+  border: 1px solid #293264;
+  border-radius: 8px;
+  padding: 4px 10px;
+  cursor: pointer;
+  border: none;
+}
+
+.correct-choice{
+  font-weight: 500;
+  font-size: 10.24px;
+  line-height: 12px;
+  text-align: center;
+  background: #94D7A2;
+  color: #293264;
+  border-radius: 8px;
+  padding: 4px 10px;
+  cursor: pointer;
+  border: none;
+}
+
+.wrong-choice{
+  font-weight: 500;
+  font-size: 10.24px;
+  line-height: 12px;
+  text-align: center;
+  background: #F8BCBC;
+  color: #454d7c;
+  border-radius: 8px;
+  padding: 4px 10px;
+  cursor: pointer;
+  border: none;
+}
+
+.quiz-screen--btn {
+  padding: 11px 22px;
+  font-weight: 600;
+  font-size: 10px;
+  line-height: 12px;
+  align-self: center;
+  margin-bottom: 24px;
+}
+
+.result-section {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  margin-bottom: 24px;
+}
+
+.result-text {
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 15px;
+  color: #293264;
+}
+
+.play-again-btn {
+  padding: 9px 24px;
+  font-weight: 600;
+  font-size: 11px;
+  line-height: 12px;
+  color: #F5F7FB;
+  border-radius: 10px;
+}
+
+/* Media Queries */
+
+@media all and (max-width: 768px) {
+  .start-screen {
+    padding: 0px 30px;
+  }
+}
+
+@media all and (max-width: 425px) {
+  form > div{
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+  }
+}
+
+@media all and (max-width: 425px) {
+  .quiz-screen {
+    padding: 40px 25px;
+  }
+  .result-section{
+    flex-direction: column;
+    gap: 18px;
+  }
+}
+
+/* Quiz Loading Animation */
+
+.lds-ellipsis {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.lds-ellipsis div {
+  position: absolute;
+  top: 33px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #4D5B9E;
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+
+.lds-ellipsis div:nth-child(1) {
+  left: 8px;
+  animation: lds-ellipsis1 0.6s infinite;
+}
+
+.lds-ellipsis div:nth-child(2) {
+  left: 8px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+
+.lds-ellipsis div:nth-child(3) {
+  left: 32px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+
+.lds-ellipsis div:nth-child(4) {
+  left: 56px;
+  animation: lds-ellipsis3 0.6s infinite;
+}
+
+@keyframes lds-ellipsis1 {
+  0% {
+    transform: scale(0);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes lds-ellipsis3 {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(0);
+  }
+}
+
+@keyframes lds-ellipsis2 {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  100% {
+    transform: translate(24px, 0);
+  }
 }
